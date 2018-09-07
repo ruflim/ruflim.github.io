@@ -91,12 +91,12 @@ var Particles = (function(window, document) {
 
     _.element.width = _.element.offsetParent.clientWidth * _.ratio;
     if (_.element.offsetParent.nodeName == "BODY") {
-      _.element.height = window.innerHeight * _.ratio;
+      _.element.height = window.innerHeight * _.ratio * 0.5;  //mru: only draw in (top) half of screen
     } else {
-      _.element.height = _.element.offsetParent.clientHeight * _.ratio;
+      _.element.height = _.element.offsetParent.clientHeight * _.ratio * 0.5;  //mru: only draw in (top) half of screen
     }
     _.element.style.width = '100%';
-    _.element.style.height = '50%';
+    _.element.style.height = '50%'; //mru: only draw in (top) half of screen
 
     _.context.scale(_.ratio, _.ratio);
   };
