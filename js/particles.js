@@ -57,6 +57,8 @@ var Particles = (function(window, document) {
 
     _.options = _._extend(_.defaults, settings);
     _.options.color = ((settings.color) ? _._hex2rgb(settings.color) : _._hex2rgb(_.defaults.color));
+    _.options.heightFraction = settings.heightFraction;
+    _.options.widthFraction = settings.widthFraction;
     _.originalSettings = JSON.parse(JSON.stringify(_.options));
 
     _._initializeCanvas();
@@ -89,14 +91,14 @@ var Particles = (function(window, document) {
 
     _.ratio = devicePixelRatio / backingStoreRatio;
 
-    _.element.width = _.element.offsetParent.clientWidth * _.ratio;
+    _.element.width = _.element.offsetParent.clientWidth * _.ratio * _.options.widthFraction;
     if (_.element.offsetParent.nodeName == "BODY") {
-      _.element.height = window.innerHeight * _.ratio * 0.5;  //mru: only draw in (top) half of screen
+      _.element.height = window.innerHeight * _.ratio * _.options.heightFraction;
     } else {
-      _.element.height = _.element.offsetParent.clientHeight * _.ratio * 0.5;  //mru: only draw in (top) half of screen
+      _.element.height = _.element.offsetParent.clientHeight * _.ratio * _.options.heightFraction;
     }
-    _.element.style.width = '100%';
-    _.element.style.height = '50%'; //mru: only draw in (top) half of screen
+    _.element.style.width = (100*_.options.widthFraction).toString() + '%';
+    _.element.style.height = (100*_.options.heightFraction).toString() + '%';
 
     _.context.scale(_.ratio, _.ratio);
   };
@@ -217,11 +219,11 @@ var Particles = (function(window, document) {
   Plugin.prototype._resize = function() {
     var _ = this;
 
-    _.element.width = _.element.offsetParent.clientWidth * _.ratio;
+    _.element.width = _.element.offsetParent.clientWidth * _.ratio * _.options.widthFraction;
     if (_.element.offsetParent.nodeName == "BODY") {
-      _.element.height = window.innerHeight * _.ratio;
+      _.element.height = window.innerHeight * _.ratio * _.options.heightFraction;
     } else {
-      _.element.height = _.element.offsetParent.clientHeight * _.ratio;
+      _.element.height = _.element.offsetParent.clientHeight * _.ratio * _.options.heightFraction;
     }
 
     _.context.scale(_.ratio, _.ratio);

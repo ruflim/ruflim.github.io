@@ -14,7 +14,7 @@
 
 <body>
   <header class="header">
-    <canvas class="header-canvas"></canvas>
+    <canvas class="background-canvas"></canvas>
   </header>
 
   <footer class="footer">
@@ -27,10 +27,12 @@
   <script>
     window.onload = function() {
       Particles.init({
-        selector: '.header-canvas',
-        color: '#75A5B7',
+        selector: '.background-canvas',
+        heightFraction: 0.45, // measured from the top
+        widthFraction: 1.0, // measured from the left
+        color: '#FFFFFF', //'#75A5B7',
         maxParticles: 100,
-        sizeVariations: 2,
+        sizeVariations: 1.1,
         speed: 0.05,
         connectParticles: false,
         minDistance: 50
