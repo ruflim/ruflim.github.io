@@ -29,6 +29,7 @@ var Particles = (function(window, document) {
         sizeVariations: 3,
         speed: 0.5,
         color: '#000000',
+        opacity: 1.0,
         minDistance: 120,
         connectParticles: false
       };
@@ -57,6 +58,7 @@ var Particles = (function(window, document) {
 
     _.options = _._extend(_.defaults, settings);
     _.options.color = ((settings.color) ? _._hex2rgb(settings.color) : _._hex2rgb(_.defaults.color));
+    _.options.opacity = ((settings.opacity) ? settings.opacity : _.defaults.opacity);
     _.options.heightFraction = settings.heightFraction;
     _.options.widthFraction = settings.widthFraction;
     _.originalSettings = JSON.parse(JSON.stringify(_.options));
@@ -400,7 +402,7 @@ var Particles = (function(window, document) {
   Particle.prototype._draw = function() {
     var _ = this;
 
-    _.context.fillStyle = 'rgb(' + _.options.color.r + ', ' + _.options.color.g  + ', ' + _.options.color.b + ')';
+    _.context.fillStyle = 'rgba(' + _.options.color.r + ', ' + _.options.color.g  + ', ' + _.options.color.b + ', ' + _.options.opacity + ')';
     _.context.beginPath();
     _.context.arc(_.x, _.y, _.radius, 0, Math.PI * 2, false);
     _.context.fill();
